@@ -88,7 +88,10 @@ newdata_again= penguins_lm3 %>%
 lm_3_predict = lm_3 %>%
   broom::augment(newdata= new_data, se_fit=TRUE, interval= "confidence")
 
-
+ggplot() +
+  geom_point(aes(x = bill_length_mm, y = bill_depth_mm, color = species), data=penguins_lm_3) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper, x = bill_length_mm, fill = species, color = NULL), alpha = .15, data=lm_3_predict) +
+  geom_line(data=lm_3_predict, aes(y = .fitted, x = bill_length_mm, color=species), size = 1)
 
 
 
